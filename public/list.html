@@ -1,0 +1,70 @@
+<html>
+
+<head>
+	<script src = "./js3/jquery-1.11.2.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9">
+			<div class="input-group">
+				<div class="input-group-btn">
+			
+					<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+					Video List <span class="caret"></span>
+					</button>
+<!--<div id="list_div">-->
+	
+					<ul class="dropdown-menu" roles="menu" id = "list" >
+		
+					</ul>
+<!--</div>-->
+				</div>
+			<input type="text" class="form-control" aria-labels="..." readonly=true>
+		
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-1"></div>
+		<div class="col-md-3">
+			<iframe id ="ytframe" title="Youtube video player" class="youtube-player" type="text/html"
+			width = "640" height="390" src="http://www.youtube.com/embed"
+			frameborder="0" allowFullScreen>
+			</iframe>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+function clicked(v){
+v = v.trim();
+
+$('#ytframe').attr('src', 'http://www.youtube.com/embed/'+ v + "?autoplay=1");
+}
+
+$(document).ready(function(){
+	$.getJSON("/api/video/all",function(data){
+		for( var i=0; i<data.length; i++){
+		var v = data[i].v.trim();
+		
+		$('#list').append('<li><a href="#" onclick="clicked(\''+ v +'\');">' + data[i].title
+		+ ' '
+		+ '</a></li>');
+	}
+	
+	clicked(data[data.length-1].v);
+	
+	});
+	
+});
+
+</script>
+
+</body>
+</html>
+
