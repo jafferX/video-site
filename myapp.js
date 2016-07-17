@@ -31,6 +31,9 @@ app.dbs.videos = db;
 //-----------	
 //routes
 //-----------	  
+//Author: Erik L
+//video-site code to make displaying of videos from different sites together easier
+
 app.get('/', function (req, res) {
   //res.send('Hello World!')
   
